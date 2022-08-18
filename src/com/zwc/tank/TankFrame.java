@@ -6,8 +6,11 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 public class TankFrame extends Frame {
+    int x = 200;
+    int y = 200;
+
     public TankFrame() {
-        setSize(800,600);
+        setSize(800, 600);
         setResizable(false);
         setTitle("tank war");
         setVisible(true);
@@ -26,6 +29,8 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
-       g.fillRect(200,200,50,50); //正方形的左上角坐标和宽高
+        g.fillRect(x, y, 50, 50); //正方形的左上角坐标和宽高
+        x += 10;
+        y += 10;
     }
 }
