@@ -32,7 +32,7 @@ public class TankFrame extends Frame {
     public void paint(Graphics g) {
         g.fillRect(x, y, 50, 50); //正方形的左上角坐标和宽高
         x += 10;
-        y += 10;
+        //y += 10;
     }
 
 
@@ -41,7 +41,9 @@ public class TankFrame extends Frame {
         //键盘按下
         @Override
         public void keyPressed(KeyEvent e) {
-            System.out.println("key pressed");
+            //x+=200;
+            //需要重新载入画布
+            //repaint();
         }
         //键盘抬起
         @Override
