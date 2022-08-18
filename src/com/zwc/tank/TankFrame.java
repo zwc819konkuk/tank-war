@@ -1,9 +1,7 @@
 package com.zwc.tank;
 
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.*;
 
 public class TankFrame extends Frame {
     int x = 200;
@@ -15,6 +13,9 @@ public class TankFrame extends Frame {
         setTitle("tank war");
         setVisible(true);
 
+        //键盘事件的监听
+        this.addKeyListener(new MyKeyListener());
+        //窗口事件的监听
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -33,4 +34,20 @@ public class TankFrame extends Frame {
         x += 10;
         y += 10;
     }
+
+
+    //处理键盘的监听【内部类】
+    class MyKeyListener extends KeyAdapter{
+        //键盘按下
+        @Override
+        public void keyPressed(KeyEvent e) {
+            System.out.println("key pressed");
+        }
+        //键盘抬起
+        @Override
+        public void keyReleased(KeyEvent e) {
+            System.out.println("key released");
+        }
+    }
+
 }
