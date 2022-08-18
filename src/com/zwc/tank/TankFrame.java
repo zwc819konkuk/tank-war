@@ -31,24 +31,66 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g) {
         g.fillRect(x, y, 50, 50); //正方形的左上角坐标和宽高
-        x += 10;
+//        x += 10;
         //y += 10;
     }
 
 
     //处理键盘的监听【内部类】
-    class MyKeyListener extends KeyAdapter{
+    class MyKeyListener extends KeyAdapter {
+
+        //坦克的方向，坦克的坐标
+        boolean bL = false;
+        boolean bU = false;
+        boolean bR = false;
+        boolean bD = false;
+
+
         //键盘按下
         @Override
         public void keyPressed(KeyEvent e) {
             //x+=200;
             //需要重新载入画布
             //repaint();
+
+            //识别按下去的键
+            int key = e.getKeyCode();
+            switch (key) {
+                case KeyEvent.VK_LEFT:
+                    bL = true;
+                    break;
+                case KeyEvent.VK_UP:
+                    bU = true;
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    bR = true;
+                    break;
+                case KeyEvent.VK_DOWN:
+                    bD = true;
+                    break;
+            }
         }
+
         //键盘抬起
         @Override
         public void keyReleased(KeyEvent e) {
-            System.out.println("key released");
+
+             //按下去的键归位
+             int key = e.getKeyCode();
+             switch (key) {
+                 case KeyEvent.VK_LEFT:
+                     bL = false;
+                     break;
+                 case KeyEvent.VK_UP:
+                     bU = false;
+                     break;
+                 case KeyEvent.VK_RIGHT:
+                     bR = false;
+                     break;
+                 case KeyEvent.VK_DOWN:
+                     bD = false;
+                     break;
+             }
         }
     }
 
