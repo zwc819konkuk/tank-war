@@ -6,6 +6,8 @@ import java.awt.event.*;
 public class TankFrame extends Frame {
     int x = 200;
     int y = 200;
+    Dir dir = Dir.DOWN;
+    private static final int SPEED = 10;
 
     public TankFrame() {
         setSize(800, 600);
@@ -31,8 +33,20 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g) {
         g.fillRect(x, y, 50, 50); //正方形的左上角坐标和宽高
-//        x += 10;
-        //y += 10;
+        switch (dir) {
+            case LEFT:
+                x -= SPEED;
+                break;
+            case UP:
+                y -= SPEED;
+                break;
+            case RIGHT:
+                x += SPEED;
+                break;
+            case DOWN:
+                y += SPEED;
+                break;
+        }
     }
 
 
@@ -68,29 +82,42 @@ public class TankFrame extends Frame {
                 case KeyEvent.VK_DOWN:
                     bD = true;
                     break;
+                default:
+                    break;
             }
+            setMainTankDir();
         }
 
         //键盘抬起
         @Override
         public void keyReleased(KeyEvent e) {
 
-             //按下去的键归位
-             int key = e.getKeyCode();
-             switch (key) {
-                 case KeyEvent.VK_LEFT:
-                     bL = false;
-                     break;
-                 case KeyEvent.VK_UP:
-                     bU = false;
-                     break;
-                 case KeyEvent.VK_RIGHT:
-                     bR = false;
-                     break;
-                 case KeyEvent.VK_DOWN:
-                     bD = false;
-                     break;
-             }
+            //按下去的键归位
+            int key = e.getKeyCode();
+            switch (key) {
+                case KeyEvent.VK_LEFT:
+                    bL = false;
+                    break;
+                case KeyEvent.VK_UP:
+                    bU = false;
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    bR = false;
+                    break;
+                case KeyEvent.VK_DOWN:
+                    bD = false;
+                    break;
+                default:
+                    break;
+            }
+            setMainTankDir();
+        }
+
+        private void setMainTankDir() {
+            if (bL) dir = Dir.LEFT;
+            if (bU) dir = Dir.UP;
+            if (bR) dir = Dir.RIGHT;
+            if (bD) dir = Dir.DOWN;
         }
     }
 
