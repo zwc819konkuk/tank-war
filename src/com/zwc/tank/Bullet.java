@@ -25,6 +25,7 @@ public class Bullet {
         g.setColor(color);
         move();
     }
+
     private void move() {
         switch (dir) {
             case LEFT:
