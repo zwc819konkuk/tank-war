@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class ImageTest {
     @Test
-    void test(){
+    void test() {
         //把一张图片从硬盘读到内存
         try {
 //            BufferedImage image = ImageIO.read(new File(""));
