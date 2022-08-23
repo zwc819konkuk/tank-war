@@ -26,10 +26,20 @@ public class Bullet {
         if (!live){
             tf.bullets.remove(this);
         }
-        Color color = g.getColor();
-        g.setColor(Color.RED);
-        g.fillOval(x, y, WIDTH, HEIGHT); //正方形的左上角坐标和宽高
-        g.setColor(color);
+        switch (dir){
+            case LEFT:
+                g.drawImage(ResourceManager.bulletL,x,y,null);
+                break;
+            case UP:
+                g.drawImage(ResourceManager.bulletU,x,y,null);
+                break;
+            case RIGHT:
+                g.drawImage(ResourceManager.bulletR,x,y,null);
+                break;
+            case DOWN:
+                g.drawImage(ResourceManager.bulletD,x,y,null);
+                break;
+        }
         move();
     }
 
