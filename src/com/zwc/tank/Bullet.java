@@ -4,21 +4,28 @@ import java.awt.*;
 
 public class Bullet {
     private static final int SPEED = 5;
-    private static final int WIDTH = 10, HEIGHT = 10 ;
+    private static final int WIDTH = 10, HEIGHT = 10;
 
-    private int x,y;
+    private int x, y;
     private Dir dir;
 
-    public Bullet(int x, int y, Dir dir) {
+    private boolean live = true;
+    TankFrame tf = null;
+
+    public Bullet(int x, int y, Dir dir,TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.tf = tf;
     }
 
     public Bullet() {
     }
 
     public void paint(Graphics g) {
+        if (!live){
+            tf.bullets.remove(this);
+        }
         Color color = g.getColor();
         g.setColor(Color.RED);
         g.fillOval(x, y, WIDTH, HEIGHT); //正方形的左上角坐标和宽高
@@ -41,5 +48,9 @@ public class Bullet {
                 y += SPEED;
                 break;
         }
+
+        if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT)
+            live = false;
+
     }
 }
