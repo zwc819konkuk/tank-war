@@ -4,6 +4,9 @@ import java.awt.*;
 
 public class Tank {
     private int x, y;
+
+
+
     private Dir dir = Dir.DOWN;
     private static final int SPEED = 5;
 
@@ -12,6 +15,23 @@ public class Tank {
 
     private boolean moving = false;
     private TankFrame tf = null;
+    private boolean living = true;
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
 
     public boolean isMoving() {
         return moving;
@@ -37,6 +57,8 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
+
+        if (!living) tf.tanks.remove(this);
 
         switch (dir) {
             case LEFT:
@@ -81,5 +103,9 @@ public class Tank {
         int bX = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
         int bY = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
         tf.bullets.add(new Bullet(bX, bY, this.dir, this.tf));
+    }
+
+    public void die() {
+        this.living = false;
     }
 }
