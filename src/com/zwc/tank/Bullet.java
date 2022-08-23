@@ -26,8 +26,8 @@ public class Bullet {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tf = tf;
-        this.group =group;
     }
 
     public Bullet() {
@@ -76,7 +76,7 @@ public class Bullet {
     }
 
     public void collideWith(Tank tank) {
-        if (this.group ==tank.getGroup()) return;
+        if (this.group == tank.getGroup()) return;
         //TODO:用一个rectangle来记录子弹的位置
         Rectangle rectBu = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
         Rectangle rectTa = new Rectangle(tank.getX(), tank.getY(), tank.WIDTH, tank.HEIGHT);

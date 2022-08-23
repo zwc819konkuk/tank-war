@@ -18,7 +18,17 @@ public class Tank {
     private boolean moving = true;
     private TankFrame tf = null;
     private boolean living = true;
+
     private Group group = Group.BAD;
+
+    public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
+        this.x = x;
+        this.y = y;
+        this.dir = dir;
+        this.group = group;
+        this.tf = tf;
+    }
+
 
     public Group getGroup() {
         return group;
@@ -44,14 +54,6 @@ public class Tank {
         this.y = y;
     }
 
-    public boolean isMoving() {
-        return moving;
-    }
-
-    public void setMoving(boolean moving) {
-        this.moving = moving;
-    }
-
     public Dir getDir() {
         return dir;
     }
@@ -60,12 +62,12 @@ public class Tank {
         this.dir = dir;
     }
 
-    public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
-        this.x = x;
-        this.y = y;
-        this.dir = dir;
-        this.tf = tf;
-        this.group = group;
+    public boolean isMoving() {
+        return moving;
+    }
+
+    public void setMoving(boolean moving) {
+        this.moving = moving;
     }
 
     public void paint(Graphics g) {
@@ -116,7 +118,7 @@ public class Tank {
     public void fire() {
         int bX = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
         int bY = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
-        tf.bullets.add(new Bullet(bX, bY, this.dir, Group.BAD, this.tf));
+        tf.bullets.add(new Bullet(bX, bY, this.dir, this.group, this.tf));
     }
 
     public void die() {
