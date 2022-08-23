@@ -1,4 +1,4 @@
-package com.zwc.tank.test;
+package test;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,11 @@ public class ImageTest {
     void test(){
         //把一张图片从硬盘读到内存
         try {
-            BufferedImage image = ImageIO.read(new File(""));
+//            BufferedImage image = ImageIO.read(new File(""));
+            BufferedImage images = ImageIO.read(
+                    //this.getClass()
+                    ImageTest.class.getClassLoader().getResourceAsStream("images/1.gif"));
+
         } catch (IOException e) {
             e.printStackTrace();
         }

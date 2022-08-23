@@ -34,14 +34,24 @@ public class Tank {
 
     public void paint(Graphics g) {
 
-        Color c = g.getColor();
-        g.setColor(Color.YELLOW);
+        switch (dir){
+            case LEFT:
+                g.drawImage(ResourceManager.tankL,x,y,null);
+                break;
+            case UP:
+                g.drawImage(ResourceManager.tankU,x,y,null);
+                break;
+            case RIGHT:
+                g.drawImage(ResourceManager.tankR,x,y,null);
+                break;
+            case DOWN:
+                g.drawImage(ResourceManager.tankD,x,y,null);
+                break;
+        }
 
-        g.fillRect(x, y, 50, 50); //正方形的左上角坐标和宽高
 
-        g.setColor(c);
+
         move();
-
 
     }
 
