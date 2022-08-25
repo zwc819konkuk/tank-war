@@ -8,7 +8,7 @@ public class Explode {
 
     private int x, y;
 
-//    private boolean living = true;
+    //    private boolean living = true;
     TankFrame tf = null;
 
     private int step = 0;
@@ -18,7 +18,7 @@ public class Explode {
         this.y = y;
         this.tf = tf;
 
-        new Thread(()->new Audio("audios/explode.wav").play()).start();
+        new Thread(() -> new Audio("audios/explode.wav").play()).start();
 
     }
 

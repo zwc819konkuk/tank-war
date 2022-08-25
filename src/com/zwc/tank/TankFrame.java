@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TankFrame extends Frame {
-    Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD,this);
+    Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD, this);
     List<Bullet> bullets = new ArrayList<>();//子弹
     List<Tank> tanks = new ArrayList<>();//敌人坦克
     List<Explode> explodes = new ArrayList<>();//爆炸
@@ -80,7 +80,6 @@ public class TankFrame extends Frame {
         }
 
 
-
     }
 
 
@@ -120,6 +119,7 @@ public class TankFrame extends Frame {
                     break;
             }
             setMainTankDir();
+            new Thread(()->new Audio("audios/tank_move.wav").play()).start();
         }
 
         //键盘抬起
