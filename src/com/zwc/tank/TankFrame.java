@@ -7,11 +7,11 @@ import java.util.List;
 
 public class TankFrame extends Frame {
     Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD,this);
-    List<Bullet> bullets = new ArrayList<>();
-    List<Tank> tanks = new ArrayList<>();
+    List<Bullet> bullets = new ArrayList<>();//子弹
+    List<Tank> tanks = new ArrayList<>();//敌人坦克
     Explode e = new Explode(100,100,this);
 
-    static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
+    static final int GAME_WIDTH = 1080, GAME_HEIGHT = 960;
 
     public TankFrame() {
         setSize(GAME_WIDTH, GAME_HEIGHT);

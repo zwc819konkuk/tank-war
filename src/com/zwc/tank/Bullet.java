@@ -75,6 +75,7 @@ public class Bullet {
 
     }
 
+    //碰撞检测
     public void collideWith(Tank tank) {
         if (this.group == tank.getGroup()) return;
         //TODO:用一个rectangle来记录子弹的位置
