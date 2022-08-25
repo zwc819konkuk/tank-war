@@ -89,11 +89,11 @@ public class Audio {
 		}
 	}
 
-//	public static void main(String[] args) {
-//		// Audio a = new Audio("audio/explode.wav");
-//		Audio a = new Audio("audio/war1.wav");
-//		a.loop();
-//
-//	}
+	public static void main(String[] args) {
+		// Audio a = new Audio("audio/explode.wav");s
+		Audio a = new Audio("audios/war1.wav");
+		a.loop();
+
+	}
 
 }
