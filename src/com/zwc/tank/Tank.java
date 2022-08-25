@@ -21,12 +21,18 @@ public class Tank {
 
     private Group group = Group.BAD;
 
+    Rectangle rect = new Rectangle();
+
     public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
         this.tf = tf;
+        rect.x = this.x;
+        rect.y = this.y;
+        rect.width = WIDTH;
+        rect.height = HEIGHT;
     }
 
 
@@ -112,6 +118,8 @@ public class Tank {
                 break;
         }
 
+
+
         if (this.group == Group.BAD && random.nextInt(100) > 95)
             this.fire();
         if (this.group == Group.BAD && random.nextInt(100) > 95)
@@ -119,6 +127,10 @@ public class Tank {
 
         //边界检测不让tank出去窗口
         boundCheck();
+
+        //更新rect
+        rect.x = this.x;
+        rect.y = this.y;
 
     }
 
