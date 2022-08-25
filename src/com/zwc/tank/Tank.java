@@ -74,18 +74,18 @@ public class Tank {
 
         if (!living) tf.tanks.remove(this);
 
-        switch(dir) {
+        switch (dir) {
             case LEFT:
-                g.drawImage(this.group == Group.GOOD? ResourceManager.goodTankL : ResourceManager.badTankL, x, y, null);
+                g.drawImage(this.group == Group.GOOD ? ResourceManager.goodTankL : ResourceManager.badTankL, x, y, null);
                 break;
             case UP:
-                g.drawImage(this.group == Group.GOOD? ResourceManager.goodTankU : ResourceManager.badTankU, x, y, null);
+                g.drawImage(this.group == Group.GOOD ? ResourceManager.goodTankU : ResourceManager.badTankU, x, y, null);
                 break;
             case RIGHT:
-                g.drawImage(this.group == Group.GOOD? ResourceManager.goodTankR : ResourceManager.badTankR, x, y, null);
+                g.drawImage(this.group == Group.GOOD ? ResourceManager.goodTankR : ResourceManager.badTankR, x, y, null);
                 break;
             case DOWN:
-                g.drawImage(this.group == Group.GOOD? ResourceManager.goodTankD : ResourceManager.badTankD, x, y, null);
+                g.drawImage(this.group == Group.GOOD ? ResourceManager.goodTankD : ResourceManager.badTankD, x, y, null);
                 break;
         }
 
@@ -112,7 +112,15 @@ public class Tank {
                 break;
         }
 
-        if (random.nextInt(10) > 8) this.fire();
+        if (this.group == Group.BAD && random.nextInt(100) > 95)
+            this.fire();
+        if (this.group == Group.BAD && random.nextInt(100) > 95)
+            randomDir();
+    }
+
+    private void randomDir() {
+
+        this.dir = Dir.values()[random.nextInt(4)];
     }
 
     public void fire() {
