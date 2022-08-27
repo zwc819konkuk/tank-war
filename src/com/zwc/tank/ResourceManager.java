@@ -1,10 +1,22 @@
 package com.zwc.tank;
 
+import com.sun.org.apache.regexp.internal.RE;
+
 import javax.imageio.ImageIO;
+import javax.print.attribute.standard.NumberUp;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class ResourceManager {
+
+    private static final ResourceManager INSTANCE = new ResourceManager();
+
+    private ResourceManager(){}
+
+    public static ResourceManager getInstance(){
+        return INSTANCE;
+    }
+
     public static BufferedImage goodTankL, goodTankU, goodTankR, goodTankD;
     public static BufferedImage badTankL, badTankU, badTankR, badTankD;
     public static BufferedImage bulletL, bulletU, bulletR, bulletD;
