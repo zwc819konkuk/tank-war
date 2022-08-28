@@ -4,10 +4,10 @@ import java.awt.*;
 import java.util.Random;
 
 public class Tank {
-    private int x, y;
+    int x, y;
 
 
-    private Dir dir = Dir.DOWN;
+    Dir dir = Dir.DOWN;
     private static final int SPEED = PropertyManager.getInt("tankSpeed");
 
     public static final int WIDTH = ResourceManager.goodTankU.getWidth();
@@ -16,12 +16,14 @@ public class Tank {
     private Random random = new Random();
 
     private boolean moving = true;
-    private TankFrame tf = null;
+    TankFrame tf = null;
     private boolean living = true;
 
-    private Group group = Group.BAD;
+    Group group = Group.BAD;
 
     Rectangle rect = new Rectangle();
+
+    FireStrategy fs;
 
     public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
@@ -33,8 +35,23 @@ public class Tank {
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
-    }
 
+        if (group == Group.GOOD) {
+            String goodFSName = (String) PropertyManager.get("goodFS");
+            try {
+                fs = (FireStrategy) Class.forName(goodFSName).getDeclaredConstructor().newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            String badFS = (String) PropertyManager.get("badFS");
+            try {
+                fs = (FireStrategy) Class.forName(badFS).getDeclaredConstructor().newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     public Group getGroup() {
         return group;
@@ -147,10 +164,7 @@ public class Tank {
     }
 
     public void fire() {
-        int bX = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
-        int bY = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
-        tf.bullets.add(new Bullet(bX, bY, this.dir, this.group, this.tf));
-        if(this.group == Group.GOOD) new Thread(()->new Audio("audios/tank_fire.wav").play()).start();
+        fs.fire(this);
     }
 
     public void die() {
