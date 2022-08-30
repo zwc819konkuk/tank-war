@@ -2,6 +2,7 @@ package com.zwc.tank;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,6 +82,7 @@ public class TankFrame extends Frame {
 
 
     }
+
 
 
     //处理键盘的监听【内部类】

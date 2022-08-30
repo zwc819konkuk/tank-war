@@ -2,7 +2,7 @@ package com.zwc.tank;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-
+        System.out.println("1");
         TankFrame tf = new TankFrame();
         int initTankCount = PropertyManager.getInt("initTankCount");
 
@@ -18,5 +18,6 @@ public class Main {
             Thread.sleep(50);
             tf.repaint();
         }
+
     }
 }
