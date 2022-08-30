@@ -1,11 +1,11 @@
-package com.zwc.tank;
+package com.zwc.tank.abstractfactory;
 
-import com.zwc.tank.abstractfactory.BaseTank;
+import com.zwc.tank.*;
 
 import java.awt.*;
 import java.util.Random;
 
-public class Tank extends BaseTank {
+public class RectTank extends BaseTank {
     int x, y;
 
 
@@ -21,10 +21,13 @@ public class Tank extends BaseTank {
     TankFrame tf = null;
     private boolean living = true;
 
+    Group group = Group.BAD;
+
+    public Rectangle rect = new Rectangle();
 
     FireStrategy fs;
 
-    public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public RectTank(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -96,22 +99,10 @@ public class Tank extends BaseTank {
 
         if (!living) tf.tanks.remove(this);
 
-        switch (dir) {
-            case LEFT:
-                g.drawImage(this.group == Group.GOOD ? ResourceManager.goodTankL : ResourceManager.badTankL, x, y, null);
-                break;
-            case UP:
-                g.drawImage(this.group == Group.GOOD ? ResourceManager.goodTankU : ResourceManager.badTankU, x, y, null);
-                break;
-            case RIGHT:
-                g.drawImage(this.group == Group.GOOD ? ResourceManager.goodTankR : ResourceManager.badTankR, x, y, null);
-                break;
-            case DOWN:
-                g.drawImage(this.group == Group.GOOD ? ResourceManager.goodTankD : ResourceManager.badTankD, x, y, null);
-                break;
-        }
-
-
+        Color c = g.getColor();
+        g.setColor(group==Group.GOOD?Color.CYAN:Color.RED);
+        g.fillRect(x,y,40,40);
+        g.setColor(c);
         move();
 
     }
@@ -152,8 +143,8 @@ public class Tank extends BaseTank {
     private void boundCheck() {
         if (this.x < 0) x = 0;
         if (this.y < 28) y = 28;
-        if (this.x > TankFrame.GAME_WIDTH - Tank.WIDTH - 2) x = TankFrame.GAME_WIDTH - Tank.WIDTH - 2;
-        if (this.y > TankFrame.GAME_HEIGHT - Tank.HEIGHT - 2) y = TankFrame.GAME_HEIGHT - Tank.HEIGHT - 2;
+        if (this.x > TankFrame.GAME_WIDTH - RectTank.WIDTH - 2) x = TankFrame.GAME_WIDTH - RectTank.WIDTH - 2;
+        if (this.y > TankFrame.GAME_HEIGHT - RectTank.HEIGHT - 2) y = TankFrame.GAME_HEIGHT - RectTank.HEIGHT - 2;
 
     }
 

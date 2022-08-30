@@ -1,11 +1,10 @@
-package com.zwc.tank;
+package com.zwc.tank.abstractfactory;
 
-import com.zwc.tank.abstractfactory.BaseBullet;
-import com.zwc.tank.abstractfactory.BaseTank;
+import com.zwc.tank.*;
 
 import java.awt.*;
 
-public class Bullet extends BaseBullet {
+public class RectBullet extends BaseBullet {
     private static final int SPEED = PropertyManager.getInt("bulletSpeed");
     public static final int WIDTH = ResourceManager.bulletD.getWidth();
     public static final int HEIGHT = ResourceManager.bulletD.getHeight();
@@ -27,7 +26,7 @@ public class Bullet extends BaseBullet {
         this.group = group;
     }
 
-    public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public RectBullet(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -42,27 +41,17 @@ public class Bullet extends BaseBullet {
         tf.bullets.add(this);
     }
 
-    public Bullet() {
+    public RectBullet() {
     }
 
     public void paint(Graphics g) {
         if (!living) {
             tf.bullets.remove(this);
         }
-        switch (dir) {
-            case LEFT:
-                g.drawImage(ResourceManager.bulletL, x, y, null);
-                break;
-            case UP:
-                g.drawImage(ResourceManager.bulletU, x, y, null);
-                break;
-            case RIGHT:
-                g.drawImage(ResourceManager.bulletR, x, y, null);
-                break;
-            case DOWN:
-                g.drawImage(ResourceManager.bulletD, x, y, null);
-                break;
-        }
+        Color c = g.getColor();
+        g.setColor(Color.BLUE);
+        g.fillRect(x,y,20,20);
+        g.setColor(c);
         move();
     }
 

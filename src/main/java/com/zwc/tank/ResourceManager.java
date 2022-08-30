@@ -1,9 +1,6 @@
 package com.zwc.tank;
 
-import com.sun.org.apache.regexp.internal.RE;
-
 import javax.imageio.ImageIO;
-import javax.print.attribute.standard.NumberUp;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 

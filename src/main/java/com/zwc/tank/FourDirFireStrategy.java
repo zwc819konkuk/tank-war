@@ -1,5 +1,7 @@
 package com.zwc.tank;
 
+import com.zwc.tank.abstractfactory.BaseTank;
+
 public class FourDirFireStrategy implements FireStrategy {
     @Override
     public void fire(Tank t) {
@@ -8,7 +10,7 @@ public class FourDirFireStrategy implements FireStrategy {
 
         Dir[] dirs = Dir.values();
         for (Dir dir : dirs) {
-            new Bullet(bX, bY, dir, t.group, t.tf);
+            t.tf.gf.createBullet(bX, bY, dir, t.group, t.tf);
         }
         if (t.group == Group.GOOD) new Thread(() -> new Audio("audios/tank_fire.wav").play()).start();
 

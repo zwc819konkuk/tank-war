@@ -1,5 +1,8 @@
 package com.zwc.tank;
 
+import com.zwc.tank.abstractfactory.*;
+import sun.plugin.dom.css.Rect;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -7,11 +10,13 @@ import java.util.List;
 
 public class TankFrame extends Frame {
     Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD, this);
-    List<Bullet> bullets = new ArrayList<>();//子弹
-    List<Tank> tanks = new ArrayList<>();//敌人坦克
-    List<Explode> explodes = new ArrayList<>();//爆炸
+    public List<BaseBullet> bullets = new ArrayList<>();//子弹
+    public List<BaseTank> tanks = new ArrayList<>();//敌人坦克
+    public List<BaseExplode> explodes = new ArrayList<>();//爆炸
 
-    static final int GAME_WIDTH = PropertyManager.getInt("gameWidth"), GAME_HEIGHT = PropertyManager.getInt("gameHeight");
+    public GameFactory gf = new DefaultFactory();
+
+    public static final int GAME_WIDTH = PropertyManager.getInt("gameWidth"), GAME_HEIGHT = PropertyManager.getInt("gameHeight");
 
     public TankFrame() {
         setSize(GAME_WIDTH, GAME_HEIGHT);
