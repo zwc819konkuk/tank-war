@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TankFrame extends Frame {
-    Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD, this);//我的坦克
-    List<Bullet> bullets = new ArrayList<>();//子弹
-    List<Tank> tanks = new ArrayList<>();//敌人坦克
-    List<Explode> explodes = new ArrayList<>();//爆炸
+
+    GameModel gm = new GameModel();
+
+
 
     static final int GAME_WIDTH = PropertyManager.getInt("gameWidth"), GAME_HEIGHT = PropertyManager.getInt("gameHeight");
 
@@ -52,34 +52,7 @@ public class TankFrame extends Frame {
     */
     @Override
     public void paint(Graphics g) {
-        Color c = g.getColor();
-        g.setColor(Color.WHITE);
-        g.drawString("子弹数量" + bullets.size(), 10, 60);
-        g.drawString("敌人数量" + tanks.size(), 10, 80);
-        g.drawString("爆炸数量" + explodes.size(), 10, 100);
-        g.setColor(c);
-
-        myTank.paint(g);
-
-        for (int i = 0; i < bullets.size(); i++) {
-            bullets.get(i).paint(g);
-        }
-        for (int i = 0; i < tanks.size(); i++) {
-            tanks.get(i).paint(g);
-        }
-
-        for (int i = 0; i < explodes.size(); i++) {
-            explodes.get(i).paint(g);
-        }
-
-        //碰撞检测 collision detect
-        for (int i = 0; i < bullets.size(); i++) {
-            for (int j = 0; j < tanks.size(); j++) {
-                bullets.get(i).collideWith(tanks.get(j));
-            }
-        }
-
-
+        gm.paint(g);
     }
 
 
@@ -142,7 +115,7 @@ public class TankFrame extends Frame {
                     bD = false;
                     break;
                 case KeyEvent.VK_CONTROL:
-                    myTank.fire();
+                    gm.getMainTank().fire();
                     break;
                 default:
                     break;
@@ -151,6 +124,8 @@ public class TankFrame extends Frame {
         }
 
         private void setMainTankDir() {
+
+            Tank myTank = gm.getMainTank();
 
             if (!bL && !bU && !bR && !bD) {
                 myTank.setMoving(false);
