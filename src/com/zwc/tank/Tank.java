@@ -1,5 +1,6 @@
 package com.zwc.tank;
 
+import com.zwc.tank.strategy.DefaultFireStrategy;
 import com.zwc.tank.strategy.FireStrategy;
 
 import java.awt.*;
@@ -23,17 +24,15 @@ public class Tank extends GameObject {
 
     public Group group = Group.BAD;
 
-    Rectangle rect = new Rectangle();
+    public Rectangle rect = new Rectangle();
 
     FireStrategy fs;
-    public GameModel gm;
 
-    public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
+    public Tank(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.gm = gm;
         rect.x = this.x;
         rect.y = this.y;
         rect.width = WIDTH;
@@ -47,13 +46,10 @@ public class Tank extends GameObject {
                 e.printStackTrace();
             }
         } else {
-            String badFS = (String) PropertyManager.get("badFS");
-            try {
-                fs = (FireStrategy) Class.forName(badFS).getDeclaredConstructor().newInstance();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            fs = new DefaultFireStrategy();
         }
+
+        GameModel.getInstance().add(this);
     }
 
     public Rectangle getRect() {
@@ -106,7 +102,7 @@ public class Tank extends GameObject {
 
     public void paint(Graphics g) {
 
-        if (!living) gm.remove(this);
+        if (!living) GameModel.getInstance().remove(this);
 
         switch (dir) {
             case LEFT:
@@ -128,7 +124,16 @@ public class Tank extends GameObject {
 
     }
 
+    public void back(){
+        x = oldX;
+        y = oldY;
+    }
+
     private void move() {
+        //记录移动之前的位置
+        oldX = x;
+        oldY = y;
+
         if (!moving) return;
 
         switch (dir) {
@@ -182,8 +187,5 @@ public class Tank extends GameObject {
         this.living = false;
     }
 
-    public void turnAround(){
-        randomDir();
-        move();
-    }
+
 }
