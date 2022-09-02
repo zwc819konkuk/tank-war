@@ -1,4 +1,7 @@
-package com.zwc.tank;
+package com.zwc.tank.strategy;
+
+import com.zwc.tank.*;
+import com.zwc.tank.strategy.FireStrategy;
 
 public class FourDirFireStrategy implements FireStrategy {
     @Override

@@ -5,5 +5,7 @@ bulletSpeed=10
 gameWidth=1080
 gameHeight=720
 #fireStrategy
-goodFS=com.zwc.tank.FourDirFireStrategy
-badFS=com.zwc.tank.DefaultFireStrategy
+goodFS=com.zwc.tank.strategy.FourDirFireStrategy
+badFS=com.zwc.tank.strategy.DefaultFireStrategy
+#colliders
+colliders=com.zwc.tank.cor.BulletTankCollider,com.zwc.tank.cor.TankTankCollider

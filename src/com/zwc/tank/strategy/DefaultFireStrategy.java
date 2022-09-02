@@ -1,6 +1,8 @@
-package com.zwc.tank;
+package com.zwc.tank.strategy;
 
-public class DefaultFireStrategy implements FireStrategy{
+import com.zwc.tank.*;
+
+public class DefaultFireStrategy implements FireStrategy {
     @Override
     public void fire(Tank t) {
         int bX = t.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;

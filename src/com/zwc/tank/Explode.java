@@ -2,7 +2,7 @@ package com.zwc.tank;
 
 import java.awt.*;
 
-public class Explode {
+public class Explode extends GameObject{
     public static final int WIDTH = ResourceManager.explodes[0].getWidth();
     public static final int HEIGHT = ResourceManager.explodes[0].getHeight();
 
@@ -26,7 +26,7 @@ public class Explode {
     public void paint(Graphics g) {
         g.drawImage(ResourceManager.explodes[step++], x, y, null);
         if (step >= ResourceManager.explodes.length)
-            gm.explodes.remove(this);
+            gm.remove(this);
 
 
     }
