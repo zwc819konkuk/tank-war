@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TankFrame extends Frame {
-    Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD, this);
+    Tank myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD, this);//我的坦克
     List<Bullet> bullets = new ArrayList<>();//子弹
     List<Tank> tanks = new ArrayList<>();//敌人坦克
     List<Explode> explodes = new ArrayList<>();//爆炸
@@ -49,7 +49,7 @@ public class TankFrame extends Frame {
     /*
         窗口需要重新绘制的时候调用
         Graphics g：系统给的画笔
-         */
+    */
     @Override
     public void paint(Graphics g) {
         Color c = g.getColor();
