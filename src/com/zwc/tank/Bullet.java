@@ -9,7 +9,6 @@ public class Bullet extends GameObject{
 
     public Rectangle rect = new Rectangle();
 
-    private int x, y;
     private Dir dir;
 
     private boolean living = true;
@@ -59,6 +58,16 @@ public class Bullet extends GameObject{
                 break;
         }
         move();
+    }
+
+    @Override
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public int getHeight() {
+        return HEIGHT;
     }
 
     private void move() {

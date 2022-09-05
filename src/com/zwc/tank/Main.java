@@ -6,7 +6,7 @@ public class Main {
         TankFrame tf = new TankFrame();
 
         //背景音效
-        new Thread(() -> new Audio("audios/war1.wav").loop()).start();
+//        new Thread(() -> new Audio("audios/war1.wav").loop()).start();
 
         while (true) {
             Thread.sleep(50);
