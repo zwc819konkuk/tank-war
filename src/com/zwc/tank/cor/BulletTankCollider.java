@@ -27,5 +27,4 @@ public class BulletTankCollider implements Collider{
         }
         return true;
     }
-
 }
