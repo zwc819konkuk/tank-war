@@ -1,9 +1,14 @@
 package com.zwc.tank;
 
+import com.zwc.tank.observer.TankFireEvent;
+import com.zwc.tank.observer.TankFireHandler;
+import com.zwc.tank.observer.TankFireObserver;
 import com.zwc.tank.strategy.DefaultFireStrategy;
 import com.zwc.tank.strategy.FireStrategy;
 
 import java.awt.*;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class Tank extends GameObject {
@@ -131,6 +136,14 @@ public class Tank extends GameObject {
     @Override
     public int getHeight() {
         return HEIGHT;
+    }
+
+    private List<TankFireObserver> fireObservers = Arrays.asList(new TankFireHandler());
+    public void handleFireKey(){
+        TankFireEvent tankFireEvent = new TankFireEvent(this);
+        for (TankFireObserver fireObserver : fireObservers) {
+            fireObserver.actionOnFire(tankFireEvent);
+        }
     }
 
     public void back(){

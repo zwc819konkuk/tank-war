@@ -65,6 +65,7 @@ public class TankFrame extends Frame {
 
 
         //键盘按下
+        //观察者模式
         @Override
         public void keyPressed(KeyEvent e) {
             //x+=200;
@@ -113,7 +114,7 @@ public class TankFrame extends Frame {
                     bD = false;
                     break;
                 case KeyEvent.VK_CONTROL:
-                    GameModel.getInstance().getMainTank().fire();
+                    GameModel.getInstance().getMainTank().handleFireKey();
                     break;
                 default:
                     break;
