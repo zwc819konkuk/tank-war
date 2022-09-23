@@ -58,7 +58,7 @@ class Msg {
 }
 
 interface Filter {
-    boolean doFilter(Request request, Response response, FilterChain chain);
+    void doFilter(Request request, Response response, FilterChain chain);
 }
 
 class Request {
@@ -72,11 +72,10 @@ class Response {
 class HTMLFilter implements Filter {
 
     @Override
-    public boolean doFilter(Request request, Response response, FilterChain chain) {
+    public void doFilter(Request request, Response response, FilterChain chain) {
         request.str = request.str.replaceAll("<", "[").replaceAll(">", "]") + "HTML";
         chain.doFilter(request, response);
         response.str += "--HTMLFilter";
-        return true;
     }
 }
 
@@ -84,11 +83,10 @@ class HTMLFilter implements Filter {
 class SensitiveFilter implements Filter {
 
     @Override
-    public boolean doFilter(Request request, Response response, FilterChain chain) {
+    public void doFilter(Request request, Response response, FilterChain chain) {
         request.str = request.str.replaceAll("996", "955") + "Sen";
         chain.doFilter(request, response);
         response.str += "--SenFilter";
-        return true;
     }
 }
 
@@ -101,10 +99,10 @@ class FilterChain{
         return this;
     }
 
-    public boolean doFilter(Request request, Response response) {
-        if (index == filters.size()) return false;
+    public void doFilter(Request request, Response response) {
+        if (index == filters.size()) return ;
         Filter f = filters.get(index);
         index++;
-        return f.doFilter(request, response, this);
+        f.doFilter(request, response, this);
     }
 }
