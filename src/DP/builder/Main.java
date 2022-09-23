@@ -2,6 +2,7 @@ package DP.builder;
 
 /**
  * 构建复杂对象
+ * 可以对属性进行分组
  */
 public class Main {
     public static void main(String[] args) {
