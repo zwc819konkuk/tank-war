@@ -1,4 +1,4 @@
-package DP.ChainOfResponsibility.servlet;
+package DP.ChainOfResponsibility.servlet.v1;
 
 
 import java.util.ArrayList;
@@ -7,12 +7,16 @@ import java.util.List;
 public class ServletMain {
     public static void main(String[] args) {
         Request request = new Request();
-        request.str = "request";
+        request.str = "大家好:),<script>,欢迎访问zwc.com,996们";
 
         Response response = new Response();
-        response.str = "response";
+        response.str = "";
 
-        System.out.println();
+        FilterChain chain = new FilterChain();
+        chain.add(new HTMLFilter()).add(new SensitiveFilter());
+        chain.doFilter(request,response);
+
+        System.out.println(request.str);
     }
 }
 
@@ -62,7 +66,8 @@ class HTMLFilter implements Filter {
 
     @Override
     public boolean doFilter(Request request, Response response) {
-        return false;
+        request.str = request.str.replaceAll("<","[").replaceAll(">","]");
+        return true;
     }
 }
 
@@ -70,7 +75,8 @@ class SensitiveFilter implements Filter {
 
     @Override
     public boolean doFilter(Request request, Response response) {
-        return false;
+        request.str = request.str.replaceAll("996","955");
+        return true;
     }
 }
 
@@ -84,7 +90,7 @@ class FilterChain implements Filter {
 
     public boolean doFilter(Request request, Response response) {
         for (Filter filter : filters) {
-            if (!filter.doFilter(request, response)) return false;
+            filter.doFilter(request,response);
         }
         return true;
     }
