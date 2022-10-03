@@ -6,17 +6,19 @@ import com.zwc.tank.cor.ColliderChain;
 import com.zwc.tank.cor.TankTankCollider;
 
 import java.awt.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameModel {
 
     private static final GameModel INSTANCE = new GameModel();
+
     static {
         INSTANCE.init();
     }
 
-    Tank myTank ;//我的坦克
+    Tank myTank;//我的坦克
 
 //    List<Bullet> bullets = new ArrayList<>();//子弹
 //    List<Tank> tanks = new ArrayList<>();//敌人坦克
@@ -26,13 +28,14 @@ public class GameModel {
 
     private List<GameObject> objects = new ArrayList<>();
 
-    public static GameModel getInstance(){
+    public static GameModel getInstance() {
         return INSTANCE;
     }
 
-    private GameModel() {}
+    private GameModel() {
+    }
 
-    private void init(){
+    private void init() {
         //初始化主战坦克
         myTank = new Tank(200, 400, Dir.DOWN, Group.GOOD);
         int initTankCount = PropertyManager.getInt("initTankCount");
@@ -43,16 +46,17 @@ public class GameModel {
         }
 
         //初始化墙
-        add(new Wall(150,150,200,50));
-        add(new Wall(550,150,200,50));
-        add(new Wall(300,300,50,200));
-        add(new Wall(550,300,50,200));
+        add(new Wall(150, 150, 200, 50));
+        add(new Wall(550, 150, 200, 50));
+        add(new Wall(300, 300, 50, 200));
+        add(new Wall(550, 300, 50, 200));
     }
 
-    public void add(GameObject go){
+    public void add(GameObject go) {
         this.objects.add(go);
     }
-    public void remove(GameObject go){
+
+    public void remove(GameObject go) {
         this.objects.remove(go);
     }
 
@@ -72,10 +76,10 @@ public class GameModel {
 
         //互相碰撞
         for (int i = 0; i < objects.size(); i++) {
-            for (int j = i+1; j < objects.size(); j++) {
+            for (int j = i + 1; j < objects.size(); j++) {
                 GameObject o1 = objects.get(i);
                 GameObject o2 = objects.get(j);
-                chain.collide(o1,o2);
+                chain.collide(o1, o2);
             }
         }
 
@@ -90,5 +94,48 @@ public class GameModel {
 
     public Tank getMainTank() {
         return myTank;
+    }
+
+    /**
+     * 把对象写进硬盘
+     */
+    public void save() {
+        File file = new File("d:/data/tank.data");
+        ObjectOutputStream oos = null;
+        try {
+            oos = new ObjectOutputStream(new FileOutputStream(file));
+            oos.writeObject(myTank);
+            oos.writeObject(objects);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (oos != null) {
+                try {
+                    oos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void load() {
+        File file = new File("d:/data/tank.data");
+        ObjectInputStream ois = null;
+        try {
+            ois = new ObjectInputStream(new FileInputStream(file));
+            myTank = (Tank) ois.readObject();
+            objects = (List) ois.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (ois != null) {
+                try {
+                    ois.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

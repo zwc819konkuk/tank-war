@@ -138,7 +138,8 @@ public class Tank extends GameObject {
         return HEIGHT;
     }
 
-    private List<TankFireObserver> fireObservers = Arrays.asList(new TankFireHandler());
+    //序列化之后没有这个属性
+    private /*transient*/ List<TankFireObserver> fireObservers = Arrays.asList(new TankFireHandler());
     public void handleFireKey(){
         TankFireEvent tankFireEvent = new TankFireEvent(this);
         for (TankFireObserver fireObserver : fireObservers) {
