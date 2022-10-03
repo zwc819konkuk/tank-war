@@ -11,7 +11,5 @@ public class Main {
         Command copyCommand = new CopyCommand(c);
         copyCommand.doIt();
         copyCommand.undo();
-
-
     }
 }
