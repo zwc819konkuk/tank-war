@@ -10,6 +10,8 @@ public class Main {
 
         Command copyCommand = new CopyCommand(c);
         copyCommand.doIt();
-        copyCommand.undo();
+//        copyCommand.undo();
+
+        System.out.println(c);
     }
 }
