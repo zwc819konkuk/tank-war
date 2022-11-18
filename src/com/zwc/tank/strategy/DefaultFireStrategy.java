@@ -12,9 +12,9 @@ public class DefaultFireStrategy implements FireStrategy {
 
         //new bullet把自己又加了一遍bug
         //两个装饰器一起使用
-        /*GameModel.getInstance().add(
-                new RectDecorator(
-                        new TailDecorator(new Bullet(bX, bY, t.dir, t.group))));*/
+//        GameModel.getInstance().add(
+//                new RectDecorator(
+//                        new TailDecorator(new Bullet(bX, bY, t.dir, t.group))));
         new Bullet(bX,bY,t.dir,t.group);
         if (t.group == Group.GOOD) new Thread(() -> new Audio("audios/tank_fire.wav").play()).start();
     }

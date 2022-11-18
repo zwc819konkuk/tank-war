@@ -10,7 +10,6 @@ public class PropertyManager {
     private PropertyManager(){}
 
 
-
     static {
         try {
             props.load(PropertyManager.class.getClassLoader().getResourceAsStream("config"));
